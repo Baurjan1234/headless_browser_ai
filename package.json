@@ -11,10 +11,12 @@
   "dependencies": {
     "@browserbasehq/sdk": "^1.4.2",
     "@primer/react": "^36.27.0",
+    "axios": "^1.7.5",
     "electron": "^32.0.1",
     "fs": "^0.0.1-security",
     "next": "14.2.6",
     "playwright-core": "^1.46.1",
+    "puppeteer": "^23.1.1",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.3.0",
