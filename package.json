@@ -11,10 +11,11 @@
   "dependencies": {
     "@browserbasehq/sdk": "^1.4.2",
     "@primer/react": "^36.27.0",
+    "@uiw/react-codemirror": "^4.23.0",
     "axios": "^1.7.5",
-    "electron": "^32.0.1",
-    "fs": "^0.0.1-security",
+    "codemirror": "^6.0.1",
     "next": "14.2.6",
+    "playwright": "^1.46.1",
     "playwright-core": "^1.46.1",
     "puppeteer": "^23.1.1",
     "react": "^18",

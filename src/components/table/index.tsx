@@ -13,15 +13,7 @@ import {
 
 import { IoMdClose } from "react-icons/io";
 import { _axios } from "@/utils/axios";
-import puppeteer from "puppeteer";
-
-type GTableDataType = {
-  browserId: string;
-  browser: {
-    wsEndpoint: string;
-  };
-  id: string | number;
-};
+import { GTableDataType } from "@/utils/types";
 
 const GTable = () => {
   const [busy, setBusy] = useState(false);
@@ -59,29 +51,6 @@ const GTable = () => {
     }
   };
 
-  const runDebug = async (wSEndpoint: string) => {
-    let browser = null;
-    // try {
-    //   console.log("start.runDebug  ");
-
-    //   browser = await puppeteer.connect({
-    //     browserWSEndpoint: wSEndpoint,
-    //   });
-    //   console.log("browser ");
-
-    //   const page = await browser.debugInfo
-    //   console.log("browser.newPage ");
-
-    //   await page.goto("https://example.com");
-    //   await page.click("a");
-    //   console.log("page.click('a'); ");
-    // } catch (e) {
-    //   console.log(e);
-    // } finally {
-    //   if (browser) browser.close();
-    // }
-  };
-
   useEffect(() => {
     fn();
   }, []);
@@ -89,24 +58,28 @@ const GTable = () => {
   return (
     <>
       <Table.Container>
-        <Box
-          width="100%"
-          display="flex"
-          justifyContent="space-between"
-          my="10px"
-        >
-          <Table.Title as="h2" id="repositories">
-            All sessions
-          </Table.Title>
-          <Button
-            aria-label="create-button"
-            size="small"
-            onClick={() => createSession()}
-            disabled={busy}
+        <Table.Header>
+          <Table.Body>afdasf</Table.Body>
+          <Box
+            // width="200%"
+            display="flex"
+            my="10px"
           >
-            Start new session
-          </Button>
-        </Box>
+            <Table.Title as="h2" id="repositories">
+              All sessions
+            </Table.Title>
+            <Button
+              sx={{ marginLeft: "24px" }}
+              aria-label="create-button"
+              size="small"
+              onClick={() => createSession()}
+              disabled={busy}
+            >
+              Start new session
+            </Button>
+          </Box>
+        </Table.Header>
+
         <DataTable
           aria-labelledby="repositories"
           aria-describedby="repositories-subtitle"
@@ -147,11 +120,12 @@ const GTable = () => {
               field: "id",
               renderCell: (row) => {
                 return (
-                  <Link href="#" target="_blank">
-                    <Button
-                      aria-label="aa"
-                      onClick={() => runDebug(row.browser.wsEndpoint)}
-                    >
+                  <Link
+                    href={`/editor/${row.browserId}?q=${row.browser.wsEndpoint}`}
+                    // target="_blank"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Button aria-label="live debug" size="small">
                       live debug
                     </Button>
                   </Link>
@@ -161,6 +135,9 @@ const GTable = () => {
             {
               header: "Stop",
               field: "id",
+              align: "end",
+
+              rowHeader: false,
               renderCell: (row) => {
                 return (
                   <IconButton
@@ -168,7 +145,8 @@ const GTable = () => {
                       stop(row.browserId);
                     }}
                     icon={IoMdClose}
-                    aria-label="close"
+                    size="small"
+                    aria-label="stop"
                     unsafeDisableTooltip={false}
                   />
                 );
@@ -178,11 +156,10 @@ const GTable = () => {
         />
       </Table.Container>
 
-      <iframe
+      {/* <iframe
         src={
-          tableData[0]
-            ? tableData[0].browser.wsEndpoint
-            : "ws://127.0.0.1:54780/devtools/browser/e564965a-1692-4c84-937e-8cedae119ca9"
+          gf
+          // "ws://127.0.0.1:53446/devtools/browser/e8d39ebb-d9d1-4776-9785-bb37999d3922"
         }
         sandbox="allow-same-origin allow-scripts"
         allow="clipboard-read; clipboard-write"
@@ -191,7 +168,7 @@ const GTable = () => {
           width: "100%",
           height: "80vh",
         }}
-      />
+      /> */}
     </>
   );
 };

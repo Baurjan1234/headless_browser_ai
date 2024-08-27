@@ -1,5 +1,5 @@
 "use client";
-import { Button, Box } from "@primer/react";
+import { Box } from "@primer/react";
 import GTable from "@/components/table";
 import { CONTAINER } from "@/utils/global";
 const Home = () => {

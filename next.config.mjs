@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    reactStrictMode: true,
+    experimental: {
+      serverComponentsExternalPackages: ['playwright', 'playwright-core'],
+    },
+};
 
 export default nextConfig;
